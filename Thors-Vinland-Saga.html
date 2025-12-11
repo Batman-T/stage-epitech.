@@ -1,0 +1,1221 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinland Saga Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* Reset et global */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; transition:0.3s; }
+body {line-height:1.6; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+/* Fond complet avec image et blur */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  min-height: 100vh;
+  overflow-x:; /* fallback si l'image ne charge pas */
+}
+
+#animeBtn {
+  position: fixed;
+  top: 140px; 
+  left: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff4d4d, #ff1e56);
+  color: white;
+  z-index: 150;
+  transition: 0.3s;
+}
+#animeBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(255,77,77,0.8);
+}
+
+
+body.light::before {
+  filter: blur(8px) brightness(1.2);
+}
+
+body.light .overlay {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #121212;
+}
+#combatBtn {
+  position: fixed;
+  top: 80px; /*  */
+  left: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  background: rgba(255, 77, 77, 0.8);
+  color: #fff;
+  z-index: 150;
+  transition: 0.3s;
+}
+/* --- BOUTON QUIZ FLOTTANT --- */
+#quizBtn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  padding: 15px 25px;
+  background: #ff4d4d;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 250;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transition: 0.3s;
+}
+#quizBtn:hover {
+  transform: scale(1.1);
+  background: #ff1e56;
+}
+
+/* --- POPUP QUIZ --- */
+#quizPopup {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:300;
+}
+
+.quiz-content {
+  background: rgba(20,20,20,0.95);
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+#closeQuiz {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ff4d4d;
+  border:none;
+  font-size:1.3rem;
+  padding: 5px 12px;
+  border-radius: 50%;
+  color:white;
+  cursor:pointer;
+}
+
+.quiz-option {
+  background: rgba(255,77,77,0.2);
+  color:white;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.quiz-option:hover {
+  background: rgba(255,77,77,0.4);
+  transform: scale(1.05);
+}
+
+.correct {
+  background: #2ecc71 !important;
+  animation: pop 0.3s ease;
+}
+.wrong {
+  background: #e74c3c !important;
+  animation: shake 0.3s ease;
+}
+
+#quiz-next {
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: #ff4d4d;
+  border:none;
+  color:white;
+  border-radius: 10px;
+  cursor:pointer;
+}
+
+/* Animations */
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Overlay semi-transparent sur le contenu */
+.overlay {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5); /* rend le texte lisible */
+  min-height: 100vh;
+  padding: 50px 20px;
+}
+/* Fond complet avec image Vinland Saga et blur */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  min-height: 100vh;
+  color: #fff;
+  overflow-x: hidden;
+  background: #111; /* fallback si l'image ne charge pas */
+}
+/* Bouton Combats */
+#combatBtn {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  background: rgba(255, 77, 77, 0.8);
+  color: #fff;
+  z-index: 150;
+  transition: 0.3s;
+}
+#combatBtn:hover {
+  background: #ff1e56;
+  transform: scale(1.1);
+}
+
+/* Popup vidéo */
+.video-popup {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  animation: fadeIn 0.3s ease;
+}
+
+.video-popup-content {
+  position: relative;
+  background: #000;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closeVideo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+body.light #combatBtn {
+  background: rgba(77, 173, 255, 0.8);
+}
+body.light .closeVideo {
+  background: #1a73e8;
+}
+
+/* Image de fond qui recouvre toute la page avec blur */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.75secondes.fr/medias/uploads/2025/07/vinland-saga_fin.jpg') center/cover no-repeat fixed;
+  filter: blur(7px) brightness(0.3); /* flou + assombrir pour texte lisible */
+  z-index: -1; /* derrière tout le contenu */
+}
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.quote-card {
+  background: rgba(255,77,77,0.1);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s, background 0.3s;
+}
+
+.quote-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,77,77,0.2);
+}
+
+.quote-card p {
+  font-size: 1rem;
+  color: #ddd;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.quote-card h4 {
+  font-size: 0.9rem;
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+/* Mode clair */
+body.light .quote-card {
+  background: rgba(77, 173, 255, 0.2);
+  color: #121212;
+}
+
+body.light .quote-card h4 {
+  color: #1a73e8;
+}
+
+/* Overlay semi-transparent pour le contenu */
+.overlay {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5); /* rend le texte lisible */
+  min-height: 100vh;
+  padding: 50px 20px;
+}
+/* Fond complet avec blur */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  min-height: 100vh;
+  color: #fff;
+  overflow-x: hidden;
+  background: #111; /* fallback si l'image ne charge pas */
+}
+
+/* Image de fond derrière tout le site */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.75secondes.fr/medias/uploads/2025/07/vinland-saga_fin.jpg') center/cover no-repeat fixed;
+  filter: blur(8px) brightness(0.5);
+  z-index: -10; /* bien derrière tous les éléments */
+}
+
+/* Overlay pour le contenu, y compris navbar et header */
+.overlay {
+  position: relative;
+  z-index: 1; /* devant le fond mais derrière tout autre popup si besoin */
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent pour lisibilité */
+  min-height: 100vh;
+  padding: 50px 20px;
+}
+/* Reset et global */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; transition:0.3s; }
+body { margin:0; padding:0; color:#fff; line-height:1.6; position:relative; min-height:100vh; overflow-x:hidden; }
+
+/* Fond flouté */
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: url('https://www.75secondes.fr/medias/uploads/2025/07/vinland-saga_fin.jpg') center/cover no-repeat fixed;
+  filter: blur(8px) brightness(0.5);
+  z-index:-10;
+}
+
+/* Overlay sur tout le contenu pour lisibilité */
+.overlay {
+  position: relative;
+  z-index:1;
+  background-color: rgba(0,0,0,0.5); /* semi-transparent pour texte lisible */
+  min-height:100vh;
+  padding:50px 20px;
+}
+
+/* Navbar */
+nav {
+  position:fixed;
+  top:0; left:0; width:100%;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 20px;
+  z-index:100; /* devant le fond */
+  background: rgba(0,0,0,0.3); /* semi-transparent pour voir le fond */
+  box-shadow:0 2px 10px rgba(0,0,0,0.5);
+}
+nav .logo { font-size:1.5rem; font-weight:bold; color:#ff4d4d; }
+nav .menu a { margin-left:20px; font-weight:500; color:#fff; }
+nav .menu a:hover { color:#ff4d4d; }
+#toggleTheme { margin-left:20px; padding:5px 15px; border:none; border-radius:20px; background:#ff4d4d; color:#fff; cursor:pointer; }
+#toggleTheme:hover { opacity:0.8; }
+
+/* Header */
+header {
+  text-align:center;
+  padding:100px 20px 50px;
+  background: transparent; /* semi-transparent pour laisser voir le fond */
+}
+header h1 { font-size:3rem; margin-bottom:10px; letter-spacing:2px; }
+header p { font-size:1.2rem; color:#fff; max-width:800px; margin:auto; }
+
+/* Sections */
+.section-title { text-align:center; font-size:2rem; margin:40px 0 20px; color:#ff4d4d; }
+section { padding:20px 0; }
+.grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:0 20px 40px; }
+.card {
+  background: transparent(255,255,255,0.05); border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s, background 0.3s;
+  cursor:pointer; text-align:center;
+}
+.card:hover { transform: translateY(-10px); background: rgba(255,77,77,0.2); }
+.card img { width:100%; display:block; border-bottom:1px solid rgba(255,255,255,0.2); }
+.card-content { padding:15px; }
+.card-content h3 { font-size:1.2rem; margin-bottom:10px; color:#ff4d4d; }
+.card-content p { font-size:0.95rem; color:#ddd; }
+
+/* Popup */
+.popup {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  display:none; justify-content:center; align-items:center;
+  padding:20px; z-index:200;
+}
+.popup-content {
+  background: rgba(20,20,20,0.95);
+  border-radius:15px; padding:20px; max-width:600px; width:100%;
+  text-align:center; position:relative;
+}
+.popup-content img { width:250px; border-radius:10px; margin-bottom:15px; }
+.popup-content h3 { font-size:1.8rem; color:#ff4d4d; margin-bottom:10px; }
+.popup-content p { color:#ddd; font-size:1rem; }
+.closePopup {
+  position:absolute; top:10px; right:10px;
+  background:#ff4d4d; border:none; color:#fff; font-size:1.2rem;
+  padding:5px 10px; border-radius:50%; cursor:pointer;
+}
+
+/* Auteur / Origine */
+.author-block {
+  background: rgba(255,77,77,0.1);
+  padding: 20px; border-radius: 15px;
+  max-width: 800px; margin: 20px auto; text-align: center;
+}
+.author-block p { font-size:1rem; margin-bottom:10px; color:#ddd; }
+
+/* Mode clair */
+body.light { background:#f5f5f5; color:#121212; }
+body.light .overlay { background-color: rgba(255,255,255,0.5); }
+body.light header { background: rgba(255,255,255,0.2); color:#121212; }
+body.light header p { color:#333; }
+body.light nav { background: rgba(255,255,255,0.5); }
+body.light nav .menu a { color:#121212; }
+body.light nav .menu a:hover { color:#ff4d4d; }
+body.light .card { background: rgba(0,0,0,0.05); }
+body.light .card-content p { color:#333; }
+body.light .popup-content { background:#fff; color:#121212; }
+body.light .popup-content p { color:#333; }
+
+/* Navbar transparente pour voir le fond derrière */
+nav {
+  background: rgba(0, 0, 0, 0.3); /* semi-transparent */
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  z-index: 2; /* devant le fond mais derrière les popups si besoin */
+}
+
+/* Navbar */
+nav {
+  position:fixed; top:0; left:0; width:100%;
+  background: rgba(20,20,20,0.95);
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 20px; z-index:100;
+  box-shadow:0 2px 10px rgba(0,0,0,0.5);
+}
+nav .logo { font-size:1.5rem; font-weight:bold; color:#ff4d4d; }
+nav .menu a { margin-left:20px; font-weight:500; }
+nav .menu a:hover { color:#fff; }
+#toggleTheme { margin-left:20px; padding:5px 15px; border:none; border-radius:20px; background:#ff4d4d; color:#fff; cursor:pointer; }
+#toggleTheme:hover { opacity:0.8; }
+
+/* Header */
+header { text-align:center; padding:100px 20px 50px; background: linear-gradient(90deg, #1f1f1f, #2b2b2b); }
+header h1 { font-size:3rem; margin-bottom:10px; letter-spacing:2px; color:#ff4d4d; }
+header p { font-size:1.2rem; color:#ccc; max-width:800px; margin:auto; }
+
+/* Sections */
+.section-title { text-align:center; font-size:2rem; margin:40px 0 20px; color:#ff4d4d; }
+section { padding:20px 0; }
+.grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:0 20px 40px; }
+.card {
+  background: rgba(255,255,255,0.05); border-radius:15px; overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s, background 0.3s;
+  cursor:pointer; text-align:center;
+}
+#animeBtn {
+  position: fixed;
+  top: 140px; 
+  left: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff4d4d, #ff1e56);
+  color: white;
+  z-index: 150;
+  transition: 0.3s;
+}
+#animeBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(255,77,77,0.8);
+}
+
+<section id="author">
+  <h2 class="section-title">Auteur et Origine</h2>
+  <div class="author-block">
+    <p><strong>Mangaka :</strong> Makoto Yukimura</p>
+    <p><strong>Origine :</strong> Vinland Saga s’inspire de l’histoire réelle des Vikings, notamment des explorations nordiques et de la guerre en Europe du XIe siècle. Makoto Yukimura mélange faits historiques et fiction pour raconter le parcours de Thorfinn et des personnages légendaires.</p>
+  </div>
+</section>
+.author-block {
+  background: rgba(255,77,77,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.author-block p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+body.light .author-block {
+  background: rgba(77, 173, 255,0.2);
+  color: #121212;
+}
+
+.card:hover { transform: translateY(-10px); background: rgba(255,77,77,0.2); }
+.card img { width:100%; display:block; border-bottom:1px solid rgba(255,255,255,0.2); }
+.card-content { padding:15px; }
+.card-content h3 { font-size:1.2rem; margin-bottom:10px; color:#ff4d4d; }
+.card-content p { font-size:0.95rem; color:#ddd; }
+
+/* Popup */
+.popup {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  display:none; justify-content:center; align-items:center;
+  padding:20px; z-index:200;
+}
+.popup-content {
+  background: rgba(20,20,20,0.95);
+  border-radius:15px; padding:20px; max-width:600px; width:100%;
+  text-align:center; position:relative;
+  animation:fadeIn 0.3s ease;
+}
+.popup-content img { width:250px; border-radius:10px; margin-bottom:15px; }
+.popup-content h3 { font-size:1.8rem; color:#ff4d4d; margin-bottom:10px; }
+.popup-content p { color:#ddd; font-size:1rem; }
+.closePopup {
+  position:absolute; top:10px; right:10px;
+  background:#ff4d4d; border:none; color:#fff; font-size:1.2rem;
+  padding:5px 10px; border-radius:50%; cursor:pointer;
+}
+header {
+  background: transparent !important;
+}
+
+/* Mode clair */
+body.light { background:#f5f5f5; color:#121212; }
+body.light nav { background: rgba(255,255,255,0.95); }
+body.light nav .menu a { color:#121212; }
+body.light nav .menu a:hover { color:#ff4d4d; }
+body.light header { background: linear-gradient(90deg, #fff, #e0e0e0); color:#121212; }
+body.light header p { color:#333; }
+body.light .card { background: rgba(0,0,0,0.05); }
+body.light .card-content p { color:#333; }
+body.light .popup-content { background:#fff; color:#121212; }
+body.light .popup-content p { color:#333; }
+
+/* Animations */
+@keyframes fadeIn { from {opacity:0} to {opacity:1} }
+</style>
+</head>
+<!-- BOUTON QUIZ FLOTTANT -->
+<button id="quizBtn">QUIZ</button>
+
+<!-- POPUP QUIZ -->
+<div id="quizPopup">
+  <div class="quiz-content">
+    <button id="closeQuiz">&times;</button>
+    <h2>Quiz Vinland Saga</h2>
+    <h3 id="quiz-question"></h3>
+    <div id="quiz-options"></div>
+    <p id="quiz-feedback"></p>
+    <button id="quiz-next" style="display:none;">Suivant</button>
+  </div>
+</div>
+
+<body>
+
+<nav>
+  <div class="logo">Vinland Saga Wiki</div>
+  <div class="menu">
+    <a href="#bio">Synopsis</a>
+    <a href="#characters">Personnages</a>
+    <a href="#arcs">Arcs</a>
+    <button id="toggleTheme">Mode Clair</button>
+  </div>
+</nav>
+<button id="combatBtn">Combats</button>
+<button id="animeBtn" onclick="window.open('https://animesama.eu/animes/vinland-saga/saison-1/episode-1', '_blank')">
+  Animé
+</button>
+
+
+<div class="video-popup" id="videoPopup">
+  <!-- <div class="video-popup-content" -->
+    <button class="closeVideo" id="closeVideo">&times;</button>
+    <iframe id="combatVideo" width="800" height="450" 
+        src="" 
+        title="Combats Vinland Saga" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+  </div>
+</div>
+
+<header>
+  <h1>Vinland Saga Wiki</h1>
+  <p>Le guide complet du manga Vinland Saga : personnages, histoires et arcs principaux.</p>
+</header>
+
+<section id="bio">
+  <h2 class="section-title">Synopsis</h2>
+  <p>Vinland Saga est un manga historique racontant l’histoire de Thorfinn, un jeune guerrier viking en quête de vengeance contre Askeladd. Le manga mêle action, politique et drame humain à l’époque des Vikings.</p>
+</section>
+
+<section id="characters">
+  <h2 class="section-title">Personnages Principaux</h2>
+  <div class="grid">
+    <div class="card" data-type="character" data-name="Thorfinn">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.eB9AVJyGlvAa0Tnm2DlL3wHaEK?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Thorfinn">
+      <div class="card-content">
+        <h3>Thorfinn</h3>
+        <p>Jeune guerrier en quête de vengeance contre Askeladd.</p>
+      </div>
+    </div>
+    <div class="card" data-type="character" data-name="Thors">
+      <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/01/thors.jpg" alt="Thors">
+      <div class="card-content">
+        <h3>Thors</h3>
+        <p>Père de Thorfinn, ancien guerrier légendaire qui renonce à la violence.</p>
+      </div>
+    </div>
+    <div class="card" data-type="character" data-name="Askeladd">
+      <img src="https://static1.dualshockersimages.com/wordpress/wp-content/uploads/2023/02/askeladd.jpg" alt="Askeladd">
+      <div class="card-content">
+        <h3>Askeladd</h3>
+        <p>Chef de mercenaires, rusé et charismatique.</p>
+      </div>
+    </div>
+    <div class="card" data-type="character" data-name="Canute">
+      <img src="https://cdn.oneesports.gg/cdn-data/2023/04/Anime_VinlandSaga_Canute_2.jpg" alt="Canute">
+      <div class="card-content">
+        <h3>Canute</h3>
+        <p>Prince danois, devient un roi stratégique et impitoyable.</p>
+      </div>
+    </div>
+    <div class="card" data-type="character" data-name="Leif">
+      <img src="https://otakukart.com/wp-content/uploads/2023/04/Leif-Erikson.jpg" alt="Leif Erikson">
+      <div class="card-content">
+        <h3>Leif Erikson</h3>
+        <p>Explorateur légendaire et mentor de Thorfinn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="arcs">
+  <h2 class="section-title">Arcs Principaux</h2>
+  <div class="grid">
+    <div class="card" data-type="arc" data-name="Vengeance">
+      <img src="https://www.japanfm.fr/wp-content/uploads/2022/11/Vinland-Saga-a-scaled.jpg" alt="Arc Vengeance">
+      <div class="card-content">
+        <h3>Arc Vengeance</h3>
+        <p>Thorfinn suit Askeladd pour venger la mort de son père.</p>
+      </div>
+    </div>
+    <div class="card" data-type="arc" data-name="Canute">
+      <img src="https://www.colejohnsonwrites.com/content/images/size/w1200/2024/09/Canute-Vinland-Saga-1.webp" alt="Arc Canute">
+      <div class="card-content">
+        <h3>Arc Canute</h3>
+        <p>Transformation de Canute d’un prince timide à un roi calculateur.</p>
+      </div>
+    </div>
+    <div class="card" data-type="arc" data-name="Vinland">
+      <img src="https://images.wallpapersden.com/image/download/vinland-saga-hd_bW1pa2yUmZqaraWkpJRmbmdlrWZlbWU.jpg" alt="Arc Vinland">
+      <div class="card-content">
+        <h3>Arc Vinland</h3>
+        <p>Thorfinn rêve de découvrir Vinland, un lieu de paix loin des guerres.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="quotes">
+  <h2 class="section-title">Citations Célèbres</h2>
+  <div class="quotes-grid">
+    <div class="quote-card">
+      <p>"La force n'est pas ce qui définit un homme, mais ses choix."</p>
+      <h4>- Thors</h4>
+    </div>
+    <div class="quote-card">
+      <p>"Si tu veux changer le monde, il faut être prêt à affronter la tempête."</p>
+      <h4>- Thorfinn</h4>
+    </div>
+    <div class="quote-card">
+      <p>"La guerre révèle le vrai visage des hommes."</p>
+      <h4>- Askeladd</h4>
+    </div>
+    <div class="quote-card">
+      <p>"La paix n'est pas donnée, elle se construit avec courage et sagesse."</p>
+      <h4>- Canute</h4>
+    </div>
+  </div>
+</section>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <button class="closePopup" id="closePopup">&times;</button>
+    <img id="popupImg" src="" alt="">
+    <h3 id="popupName"></h3>
+    <p id="popupDesc"></p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Vinland Saga Wiki
+</footer>
+
+<script>
+// --- QUIZ POPUP ---
+const quizBtn = document.getElementById("quizBtn");
+const quizPopup = document.getElementById("quizPopup");
+const closeQuiz = document.getElementById("closeQuiz");
+const questionBox = document.getElementById("quiz-question");
+const optionsBox = document.getElementById("quiz-options");
+const feedback = document.getElementById("quiz-feedback");
+const nextQuizBtn = document.getElementById("quiz-next");
+
+let step = 0;
+
+// Questions :
+const quiz = [
+  {
+    q: "Quel est l’objectif principal de Thorfinn ?",
+    options: ["Venger Thors", "Devenir roi"],
+    answer: "Venger Thors"
+  },
+  {
+    q: "Qui manipule le destin du prince Canute ?",
+    options: ["Askeladd", "Thorkell"],
+    answer: "Askeladd"
+  },
+  {
+    q: "Quel personnage renonce à la violence ?",
+    options: ["Thors", "Bjorn"],
+    answer: "Thors"
+  },
+  {
+    q: "Quel est le rêve ultime de Thorfinn ?",
+    options: ["Conquérir l’Angleterre", "Créer un pays de paix, le Vinland"],
+    answer: "Créer un pays de paix, le Vinland"
+  },
+  {
+    q: "Quel guerrier légendaire est connu pour sa force surhumaine ?",
+    options: ["Thorkell", "Askeladd"],
+    answer: "Thorkell"
+  },
+  {
+    q: "Qui est l'explorateur qui a inspiré Thorfinn dans sa quête du Vinland ?",
+    options: ["Leif Erikson", "Ragnar"],
+    answer: "Leif Erikson"
+  }
+];
+
+
+quizBtn.onclick = () => {
+  quizPopup.style.display = "flex";
+  loadQuiz();
+};
+
+closeQuiz.onclick = () => {
+  quizPopup.style.display = "none";
+};
+
+function loadQuiz() {
+  const q = quiz[step];
+  questionBox.textContent = q.q;
+
+  optionsBox.innerHTML = "";
+  feedback.textContent = "";
+  nextQuizBtn.style.display = "none";
+
+  q.options.forEach(opt => {
+    const btn = document.createElement("div");
+    btn.classList.add("quiz-option");
+    btn.textContent = opt;
+
+    btn.onclick = () => checkAnswer(btn, q.answer);
+
+    optionsBox.appendChild(btn);
+  });
+}
+
+function checkAnswer(btn, correct) {
+  const all = document.querySelectorAll(".quiz-option");
+  all.forEach(o => o.style.pointerEvents = "none");
+
+  if (btn.textContent === correct) {
+    btn.classList.add("correct");
+    feedback.textContent = "✔ Bonne réponse !";
+  } else {
+    btn.classList.add("wrong");
+    feedback.textContent = "✘ Mauvaise réponse !";
+  }
+
+  nextQuizBtn.style.display = "block";
+}
+
+nextQuizBtn.onclick = () => {
+  step++;
+  if (step >= quiz.length) {
+    questionBox.textContent = "Quiz terminé !";
+    optionsBox.innerHTML = "";
+    feedback.textContent = "Merci d'avoir joué !";
+    nextQuizBtn.style.display = "none";
+  } else {
+    loadQuiz();
+  }
+};
+
+// Mode clair/sombre
+const toggleBtn = document.getElementById("toggleTheme");
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  toggleBtn.textContent = document.body.classList.contains("light") ? "Mode Sombre" : "Mode Clair";
+});
+
+// Données personnages
+const characters = {
+  "Thorfinn": {
+    img: "https://tse4.mm.bing.net/th/id/OIP.eB9AVJyGlvAa0Tnm2DlL3wHaEK?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+    desc: "Thorfinn est le fils de Thors. Il cherche à venger la mort de son père en suivant Askeladd. Son parcours est rempli de combats et de dilemmes moraux."
+  },
+  "Thors": {
+    img: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/01/thors.jpg",
+    desc: "Thors est un ancien guerrier viking devenu pacifiste. Il est le père de Thorfinn et tente de protéger sa famille en renonçant à la violence."
+  },
+  "Askeladd": {
+    img: "https://static1.dualshockersimages.com/wordpress/wp-content/uploads/2023/02/askeladd.jpg",
+    desc: "Askeladd est le chef d’une troupe de mercenaires. Rusé et charismatique, il manipule les événements pour servir ses propres intérêts."
+  },
+  "Canute": {
+    img: "https://cdn.oneesports.gg/cdn-data/2023/04/Anime_VinlandSaga_Canute_2.jpg",
+    desc: "Prince du Danemark, timide au départ, il devient un roi puissant et calculateur."
+  },
+  "Leif": {
+    img: "https://otakukart.com/wp-content/uploads/2023/04/Leif-Erikson.jpg",
+    desc: "Leif Erikson est un explorateur viking légendaire et mentor de Thorfinn."
+  }
+};
+
+// Données arcs
+const arcs = {
+  "Vengeance": {
+    img: "https://www.japanfm.fr/wp-content/uploads/2022/11/Vinland-Saga-a-scaled.jpg",
+    desc: "Thorfinn suit Askeladd pour venger la mort de son père. Cet arc met en avant les combats, la stratégie et la brutalité des Vikings."
+  },
+  "Canute": {
+    img: "https://www.colejohnsonwrites.com/content/images/size/w1200/2024/09/Canute-Vinland-Saga-1.webp",
+    desc: "Cet arc montre la transformation de Canute d’un prince timide à un roi impitoyable, révélant les intrigues politiques."
+  },
+  "Vinland": {
+    img: "https://images.wallpapersden.com/image/download/vinland-saga-hd_bW1pa2yUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+    desc: "L’arc final explore le rêve de Thorfinn de découvrir Vinland, un lieu de paix loin des guerres et de la vengeance."
+  }
+};
+
+// Popup interaction
+const cards = document.querySelectorAll(".card");
+const popup = document.getElementById("popup");
+const popupImg = document.getElementById("popupImg");
+const popupName = document.getElementById("popupName");
+const popupDesc = document.getElementById("popupDesc");
+const closePopup = document.getElementById("closePopup");
+
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    const type = card.dataset.type;
+    const name = card.dataset.name;
+    if(type === "character") {
+      popupImg.src = characters[name].img;
+      popupName.textContent = name;
+      popupDesc.textContent = characters[name].desc;
+    } else if(type === "arc") {
+      popupImg.src = arcs[name].img;
+      popupName.textContent = name + " (Arc)";
+      popupDesc.textContent = arcs[name].desc;
+    }
+    popup.style.display = "flex";
+  });
+});
+
+closePopup.addEventListener("click", () => popup.style.display="none");
+popup.addEventListener("click", e => { if(e.target===popup) popup.style.display="none"; });
+</script>
+body::before {
+  z-index: -1 !important;
+}
+<!-- Bouton Combat -->
+<button class="combat-btn">Combat</button>
+
+<!-- Modale pour la vidéo -->
+<div class="video-modal">
+  <div class="video-modal-content">
+    <span class="close-video">&times;</span>
+    <iframe id="combatVideo" width="800" height="450" 
+            src="" 
+            title="Combat Video" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+  </div>
+</div>
+
+<style>
+/* Bouton style wiki */
+.combat-btn {
+  background-color: #b22222;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Style modale */
+.video-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  overflow: auto;
+}
+
+/* Contenu vidéo au centre */
+.video-modal-content {
+  position: relative;
+  margin: 5% auto;
+  width: 80%;
+  max-width: 900px;
+}
+
+/* Bouton fermer */
+.close-video {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mini-Jeu Vinland Saga</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  { background-image: url ( https://i.pinimg.com/736x/06/31/df/0631df9a0e904a2cc56a285750cd6490.jpg); }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  color: white;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+#game-area {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.character-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  height: 300px;
+  position: relative;
+}
+
+.character {
+  width: 150px;
+  height: 250px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+#thors { background-image: url('https://cdn.wallpapersafari.com/46/5/OH3j0A.png); } /* remplace par ton image Thors */
+#thorfinn { background-image: url(https://www.shoshosein.com/sites/default/files/styles/medium/public/personnages/vinland-saga/thorfinn-enfant.png?itok=lNd73wGI'); } /* image Thorfinn */
+#askeladd { background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d9cf4e71-4277-4bf3-990d-198d1b038db9/dg3tph4-f9567185-96e4-41a4-bd23-cb001ef8e77a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q5Y2Y0ZTcxLTQyNzctNGJmMy05OTBkLTE5OGQxYjAzOGRiOVwvZGczdHBoNC1mOTU2NzE4NS05NmU0LTQxYTQtYmQyMy1jYjAwMWVmOGU3N2EucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.tH2Fmr8DxakIHXhcniwOdzSlGfNrCWQGjlJUpwGPxgM); } /* image Askeladd */
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#log {
+  margin-top: 10px;
+  height: 150px;
+  overflow-y: auto;
+  border: 1px solid white;
+  padding: 10px;
+  text-align: left;
+  background: rgba(0,0,0,0.4);
+}
+</style>
+</head>
+<body>
+
+<h1>Mini-Jeu Vinland Saga</h1>
+<button id="startGame">Commencer le jeu</button>
+
+<div id="game-area">
+  <h2>Choisis ton personnage :</h2>
+  <button onclick="chooseCharacter('Thors')">Thors</button>
+  <button onclick="chooseCharacter('Thorfinn')">Thorfinn</button>
+</div>
+
+<div id="log" style="display:none;"></div>
+
+<script>
+let player, playerHP, enemyHP, enemyName;
+
+function chooseCharacter(char) {
+  player = char;
+  playerHP = char === 'Thors' ? 50 : 35;
+  enemyName = 'Askeladd';
+  enemyHP = 40;
+
+  document.getElementById("game-area").innerHTML = `
+    <div class="character-container">
+      <div id="${char.toLowerCase()}" class="character"></div>
+      <div id="askeladd" class="character"></div>
+    </div>
+    <p>Ton HP: <span id="playerHP">${playerHP}</span> | ${enemyName} HP: <span id="enemyHP">${enemyHP}</span></p>
+    <button onclick="playerAttack()">Attaquer</button>
+  `;
+  document.getElementById("log").style.display = "block";
+  logMessage("Le combat commence !");
+}
+
+function playerAttack() {
+  let damage = Math.floor(Math.random() * 10) + 5;
+  enemyHP -= damage;
+  if (enemyHP < 0) enemyHP = 0;
+  document.getElementById("enemyHP").innerText = enemyHP;
+  logMessage(`${player} inflige ${damage} dégâts à ${enemyName} !`);
+
+  if(enemyHP <= 0) {
+    logMessage(`Tu as vaincu ${enemyName} ! 🎉`);
+    document.getElementById("game-area").innerHTML += `<h2>Victoire !</h2>`;
+  } else {
+    setTimeout(enemyAttack, 1000);
+  }
+}
+
+function enemyAttack() {
+  let damage = Math.floor(Math.random() * 8) + 3;
+  playerHP -= damage;
+  if (playerHP < 0) playerHP = 0;
+  document.getElementById("playerHP").innerText = playerHP;
+  logMessage(`${enemyName} attaque et inflige ${damage} dégâts à ${player} !`);
+
+  if(playerHP <= 0) {
+    logMessage(`${player} a été vaincu par ${enemyName} 😢`);
+    document.getElementById("game-area").innerHTML += `<h2>Défaite...</h2>`;
+  }
+}
+
+function logMessage(msg) {
+  let log = document.getElementById("log");
+  log.innerHTML += msg + "<br>";
+  log.scrollTop = log.scrollHeight;
+}
+
+document.getElementById("startGame").addEventListener("click", () => {
+  document.getElementById("game-area").style.display = "block";
+});
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Combat Vinland Saga</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #2e8b57; /* vert forêt */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/8b/Forest_background_example.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .combat-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; /* en haut de la page */
+    padding-top: 50px; /* espace depuis le haut */
+    height: 400px; /* hauteur du combat */
+  }
+
+  .character {
+    width: 150px;
+    height: auto;
+  }
+
+  #combat-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  #video-container {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #video-container iframe {
+    width: 560px;
+    height: 315px;
+  }
+</style>
+</head>
+<body>
+
+<div class="combat-container">
+  <!-- Personnage à gauche -->
+  <img src="https://www.shoshosein.com/sites/default/files/styles/medium/public/personnages/vinland-saga/thorfinn-enfant.png?itok=lNd73wGI'" class="character" id="thorfinn">
+  <!-- Ennemi à droite -->
+  <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d9cf4e71-4277-4bf3-990d-198d1b038db9/dg3tph4-f9567185-96e4-41a4-bd23-cb001ef8e77a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q5Y2Y0ZTcxLTQyNzctNGJmMy05OTBkLTE5OGQxYjAzOGRiOVwvZGczdHBoNC1mOTU2NzE4NS05NmU0LTQxYTQtYmQyMy1jYjAwMWVmOGU3N2EucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.tH2Fmr8DxakIHXhcniwOdzSlGfNrCWQGjlJUpwGPxgM" class="character" id="askeladd">
+</div>
+
+<!-- Bouton pour lancer le combat -->
+<button id="combat-button">Combat !</button>
+
+<!-- Container de la vidéo -->
+<div id="video-container">
+  <iframe src="https://www.youtube.com/embed/iGA225WpTpE" title="Combat Vinland Saga" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<script>
+  const button = document.getElementById('combat-button');
+  const videoContainer = document.getElementById('video-container');
+
+  button.addEventListener('click', () => {
+    videoContainer.style.display = 'block';
+    videoContainer.scrollIntoView({ behavior: 'smooth' }); // fait défiler jusqu'à la vidéo
+  });
+</script>
+
+</body>
+</html>
